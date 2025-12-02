@@ -1,5 +1,5 @@
 pipeline {
-    agent any  // Utilise n’importe quel agent disponible (master inclus)
+    agent any
     options {
         buildDiscarder(logRotator(numToKeepStr: '5'))
     }
@@ -7,7 +7,7 @@ pipeline {
         stage('Scan') {
             steps {
                 withSonarQubeEnv(installationName: 'sq1') {
-                    sh './mvnw clean org.sonarsource.scanner.maven:sonar-maven-plugin:3.9.0.2155:sonar'
+                    sh 'mvn clean org.sonarsource.scanner.maven:sonar-maven-plugin:3.9.0.2155:sonar'
                 }
             }
         }
